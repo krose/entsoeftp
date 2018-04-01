@@ -9,10 +9,16 @@
 #'
 entsoe_get_file <- function(basis_name, year = lubridate::year(Sys.Date()), month = lubridate::month(Sys.Date())){
 
-  req <- httr::GET(url = paste0("ftp://62.209.222.9/export/export/", basis_name, "/", year, "_", month, "_", basis_name, ".csv"),
-                   httr::authenticate(user = "TP_export", password = "eG75pLwgyfyQLzjJ"))
+  req <- suppressWarnings(httr::GET(url = paste0("ftp://62.209.222.9/export/export/", basis_name, "/", year, "_", month, "_", basis_name, ".csv"),
+                   httr::authenticate(user = "TP_export", password = "eG75pLwgyfyQLzjJ")))
 
   con <- httr::content(req, as = "raw")
 
-  read.delim(con, skipNul = TRUE, stringsAsFactors = FALSE)
+  # fix BOM and embeeded NULL
+  con <- con[!con %in% charToRaw("ÿþ")]
+  con <- con[!con %in% as.raw(0)]
+
+  con_df <- suppressMessages(readr::read_tsv(con, na = "N/A"))
+
+  con_df
 }
