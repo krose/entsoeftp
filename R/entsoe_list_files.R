@@ -1,13 +1,13 @@
 
 #' Function to list files in a directory.
 #'
-#' @param  basis_name High level name of the file.
+#' @param  basis_name High level folder name of the file.
 #'
 #' @export
 #'
 entsoe_list_files <- function(basis_name){
 
-  req <- httr::GET(url = paste0("ftp://62.209.222.9/export/export/", basis_name, "/"), httr::authenticate(user = "TP_export", password = "eG75pLwgyfyQLzjJ"))
+  req <- suppressWarnings(httr::GET(url = paste0("ftp://62.209.222.9/export/export/", basis_name, "/"), httr::authenticate(user = "TP_export", password = "eG75pLwgyfyQLzjJ")))
 
   con <- httr::content(x = req, as = "text", encoding = "UTF-8")
 
