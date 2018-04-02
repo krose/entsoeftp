@@ -3,9 +3,9 @@
 #'
 #' @export
 #'
-entsoe_list_links <- function(){
+entsoe_list_folders <- function(){
 
-  req <- httr::GET(url = "ftp://62.209.222.9/export/export/", httr::authenticate(user = "TP_export", password = "eG75pLwgyfyQLzjJ"))
+  req <- suppressWarnings(httr::GET(url = "ftp://62.209.222.9/export/export/", httr::authenticate(user = "TP_export", password = "eG75pLwgyfyQLzjJ")))
 
   con <- httr::content(x = req, as = "text", encoding = "UTF-8")
 
@@ -32,7 +32,7 @@ parse_links <- function(x) {
       date <- strex(z, "[A-Za-z]{3}\\s+[0-9]{1,2}\\s+[0-9]{2}:[0-9]{2}|[A-Za-z]{3}\\s+[0-9]{1,2}\\s+[0-9]{4}")
       links <- strex(z, "[A-Za-z0-9_-]+$")
       tmp <- list(perm = perm, dir = dir, group = group, size = size,
-                  date = date, file = file)
+                  date = date, links = links)
       tmp[vapply(tmp, length, 1) == 0] <- ""
       tmp
     })
