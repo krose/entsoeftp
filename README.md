@@ -7,6 +7,8 @@ The goal of entsoeftp is to give access to [one of the three](https://entsoe.zen
 
 The current ftp solution is en beta and will change in mid 2018.
 
+All dates and times are in UTC.
+
 Installation
 ------------
 
@@ -30,8 +32,6 @@ List the folders on the server:
 
 ``` r
 suppressPackageStartupMessages(library(tidyverse))
-#> Warning: package 'tibble' was built under R version 3.4.3
-#> Warning: package 'tidyr' was built under R version 3.4.3
 library(entsoeftp)
 
 glimpse(entsoe_list_folders())

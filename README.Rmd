@@ -18,6 +18,8 @@ The goal of entsoeftp is to give access to [one of the three](https://entsoe.zen
 
 The current ftp solution is en beta and will change in mid 2018.
 
+All dates and times are in UTC.
+
 ## Installation
 
 You can install the development version from [GitHub](https://github.com/) with:
@@ -36,7 +38,7 @@ There are three functions:
 
 List the folders on the server:
 
-```{r listfolders}
+```{r listfolders, warning=FALSE}
 suppressPackageStartupMessages(library(tidyverse))
 library(entsoeftp)
 
