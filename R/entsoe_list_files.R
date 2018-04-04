@@ -7,7 +7,7 @@
 #'
 entsoe_list_files <- function(basis_name){
 
-  req <- suppressWarnings(httr::GET(url = paste0("ftp://62.209.222.9/export/export/", basis_name, "/"), httr::authenticate(user = "TP_export", password = "eG75pLwgyfyQLzjJ")))
+  req <- entsoe_create_url_files(basis_name)
 
   con <- httr::content(x = req, as = "text", encoding = "UTF-8")
 

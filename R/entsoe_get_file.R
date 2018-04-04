@@ -9,8 +9,7 @@
 #'
 entsoe_get_file <- function(basis_name, year = lubridate::year(Sys.Date()), month = lubridate::month(Sys.Date())){
 
-  req <- suppressWarnings(httr::GET(url = paste0("ftp://62.209.222.9/export/export/", basis_name, "/", year, "_", month, "_", basis_name, ".csv"),
-                   httr::authenticate(user = "TP_export", password = "eG75pLwgyfyQLzjJ")))
+  req <- entsoe_create_url_file(basis_name, year, month)
 
   con <- httr::content(req, as = "raw")
 
