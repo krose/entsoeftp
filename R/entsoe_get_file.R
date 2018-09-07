@@ -17,7 +17,11 @@ entsoe_get_file <- function(basis_name, year = lubridate::year(Sys.Date()), mont
   con <- con[!con %in% charToRaw("ÿþ")]
   con <- con[!con %in% as.raw(0)]
 
-  con_df <- suppressMessages(readr::read_tsv(con, na = "N/A"))
+  con_df <- suppressWarnings(suppressMessages(readr::read_tsv(con, na = "N/A")))
+
+  # remove error lines.
+  con_df <- con_df[!is.na(con_df$month), ]
+  con_df$year <- as.integer(con_df$year)
 
   con_df
 }
