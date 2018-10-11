@@ -12,7 +12,8 @@ entsoe_list_folders <- function(){
   con_df <- parse_links(con)
   con_df <- lapply(con_df, as.data.frame, stringsAsFactors = FALSE)
   con_df <- do.call(rbind, con_df)
-  con_df$date <- strptime(con_df$date, format = "%b %d %H:%M", tz = "UTC")
+  # con_df$date <- strptime(con_df$date, format = "%b %d %H:%M", tz = "UTC")
+  con_df <- dplyr::arrange(.data = con_df, links)
 
   con_df
 }
@@ -21,7 +22,7 @@ entsoe_list_folders <- function(){
 #' Thanks to Scott Chamberlain (from the ropensci/ftp package).
 parse_links <- function(x) {
 
-  x <- strsplit(x, "\r\n")[[1]]
+  x <- strsplit(x, "\n")[[1]]
 
   x <-
     lapply(x, function(z) {

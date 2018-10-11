@@ -20,8 +20,10 @@ entsoe_get_file <- function(basis_name, year = lubridate::year(Sys.Date()), mont
   con_df <- suppressWarnings(suppressMessages(readr::read_tsv(con, na = "N/A")))
 
   # remove error lines.
-  con_df <- con_df[!is.na(con_df$month), ]
-  con_df$year <- as.integer(con_df$year)
+  con_df$Year <- suppressWarnings(as.integer(con_df$Year))
+  con_df <- con_df[!is.na(con_df$Year),]
+
+  con_df <- suppressMessages(readr::type_convert(con_df))
 
   con_df
 }

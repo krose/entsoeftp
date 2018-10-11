@@ -14,7 +14,8 @@ entsoe_list_files <- function(basis_name){
   con_df <- parse_files(con)
   con_df <- lapply(con_df, as.data.frame, stringsAsFactors = FALSE)
   con_df <- do.call(rbind, con_df)
-  con_df$date <- strptime(con_df$date, format = "%b %d %H:%M", tz = "UTC")
+  # con_df$date <- strptime(con_df$date, format = "%b %d %H:%M", tz = "UTC")
+  con_df <- dplyr::arrange(.data = con_df, file)
 
   con_df
 }
@@ -24,7 +25,7 @@ entsoe_list_files <- function(basis_name){
 #' Thanks to Scott Chamberlain (from the ropensci/ftp package).
 parse_files <- function(x) {
 
-  x <- strsplit(x, "\r\n")[[1]]
+  x <- strsplit(x, "\n")[[1]]
 
   x <-
     lapply(x, function(z) {
