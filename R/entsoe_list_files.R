@@ -16,6 +16,7 @@ entsoe_list_files <- function(basis_name){
   con_df <- do.call(rbind, con_df)
   # con_df$date <- strptime(con_df$date, format = "%b %d %H:%M", tz = "UTC")
   con_df <- dplyr::arrange(.data = con_df, file)
+  con_df <- dplyr::filter(.data = con_df, !stringr::str_detect(perm, "^d"))
 
   con_df
 }
@@ -30,12 +31,14 @@ parse_files <- function(x) {
   x <-
     lapply(x, function(z) {
       perm <- strex(z, "^[a-z-]+")
-      dir <- strex(z, "[0-9]\\s[a-z]+")
-      group <- strex(z, "csdb-ops|1005")
+      dir <- strex(z, "[0-9][[:space:]][a-z]+")
+      #group <- strex(z, "csdb-ops|1005")
       size <- strexg(z, "[0-9]{2,}")[[1]][2]
-      date <- strex(z, "[A-Za-z]{3}\\s+[0-9]{1,2}\\s+[0-9]{2}:[0-9]{2}|[A-Za-z]{3}\\s+[0-9]{1,2}\\s+[0-9]{4}")
+      date <- strex(z, "[A-Za-z]{3}[[:space:]]+[0-9]{1,2}[[:space:]]+[0-9]{2}:[0-9]{2}|[A-Za-z]{3}[[:space:]]+[0-9]{1,2}[[:space:]]+[0-9]{4}")
       file <- strex(z, "[A-Za-z0-9_.-]+$")
-      tmp <- list(perm = perm, dir = dir, group = group, size = size,
+      tmp <- list(perm = perm, dir = dir,
+                  #group = group,
+                  size = size,
                   date = date, file = file)
       tmp[vapply(tmp, length, 1) == 0] <- ""
       tmp
