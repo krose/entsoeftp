@@ -4,8 +4,7 @@
 \alias{entsoe_get_log}
 \title{Function to get the file for a basis_name, year and month.}
 \usage{
-entsoe_get_log(basis_name, year = lubridate::year(Sys.Date()),
-  month = lubridate::month(Sys.Date()))
+entsoe_get_log()
 }
 \arguments{
 \item{basis_name}{High level folder name of the file.}

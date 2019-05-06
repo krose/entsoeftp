@@ -7,7 +7,7 @@
 #'
 #' @export
 #'
-entsoe_get_log <- function(basis_name, year = lubridate::year(Sys.Date()), month = lubridate::month(Sys.Date())){
+entsoe_get_log <- function(){
 
   req <- entsoe_create_url_log()
 
