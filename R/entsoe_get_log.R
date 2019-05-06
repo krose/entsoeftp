@@ -7,11 +7,10 @@
 #'
 #' @export
 #'
-entsoe_get_file <- function(basis_name, year = lubridate::year(Sys.Date()), month = lubridate::month(Sys.Date())){
+entsoe_get_log <- function(basis_name, year = lubridate::year(Sys.Date()), month = lubridate::month(Sys.Date())){
 
-  req <- entsoe_create_url_file(basis_name, year, month)
+  req <- entsoe_create_url_log()
 
-  # con <- httr::content(req, as = "raw")
   con <- req$content
 
   # fix BOM and embeeded NULL
@@ -20,9 +19,8 @@ entsoe_get_file <- function(basis_name, year = lubridate::year(Sys.Date()), mont
 
   con_df <- suppressWarnings(suppressMessages(readr::read_tsv(con, na = "N/A")))
 
-  # remove error lines.
-  con_df$Year <- suppressWarnings(as.integer(con_df$Year))
-  con_df <- con_df[!is.na(con_df$Year),]
+  # remove first line of with -------
+  con_df <- con_df[-1, ]
 
   con_df <- suppressMessages(readr::type_convert(con_df))
 

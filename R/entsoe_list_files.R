@@ -9,7 +9,8 @@ entsoe_list_files <- function(basis_name){
 
   req <- entsoe_create_url_files(basis_name)
 
-  con <- httr::content(x = req, as = "text", encoding = "UTF-8")
+  # con <- httr::content(x = req, as = "text", encoding = "UTF-8")
+  con <- rawToChar(req$content)
 
   con_df <- parse_files(con)
   con_df <- lapply(con_df, as.data.frame, stringsAsFactors = FALSE)
