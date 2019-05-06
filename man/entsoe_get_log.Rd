@@ -6,13 +6,6 @@
 \usage{
 entsoe_get_log()
 }
-\arguments{
-\item{basis_name}{High level folder name of the file.}
-
-\item{year}{Year.}
-
-\item{month}{Month (example: 1 or 11).}
-}
 \description{
 Function to get the file for a basis_name, year and month.
 }
