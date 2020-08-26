@@ -4,8 +4,8 @@
 \alias{entsoe_get_file}
 \title{Function to get the file for a basis_name, year and month.}
 \usage{
-entsoe_get_file(basis_name, year = lubridate::year(Sys.Date()),
-  month = lubridate::month(Sys.Date()))
+entsoe_get_file(basis_name = NULL, year = lubridate::year(Sys.Date()),
+  month = lubridate::month(Sys.Date()), file_name = NULL)
 }
 \arguments{
 \item{basis_name}{High level folder name of the file.}
@@ -13,6 +13,8 @@ entsoe_get_file(basis_name, year = lubridate::year(Sys.Date()),
 \item{year}{Year.}
 
 \item{month}{Month (example: 1 or 11).}
+
+\item{file_name}{File name of file to download. If this param is used it will overwrite basis_name, year and month.}
 }
 \description{
 Function to get the file for a basis_name, year and month.
