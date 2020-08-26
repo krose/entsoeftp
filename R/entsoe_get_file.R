@@ -31,7 +31,7 @@ entsoe_get_file <- function(basis_name = NULL, year = lubridate::year(Sys.Date()
   con <- con[!con %in% charToRaw("ÿþ")]
   con <- con[!con %in% as.raw(0)]
 
-  con_df <- suppressWarnings(suppressMessages(readr::read_tsv(con, na = "N/A")))
+  con_df <- suppressWarnings(suppressMessages(readr::read_tsv(con, na = "N/A", locale = readr::locale(tz = "UTC"))))
 
   # remove error lines.
   con_df$Year <- suppressWarnings(as.integer(con_df$Year))
