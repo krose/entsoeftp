@@ -52,9 +52,11 @@ entsoe_get_file <- function(basis_name = NULL, year = lubridate::year(Sys.Date()
 entsoe_split_file_name <- function(file_name){
 
   file_decom <- stringr::str_split(string = file_name, pattern = "[_]", n = 3, simplify = TRUE)
-  file_decom <- as.data.frame(file_decom)
+  file_decom <- as.data.frame(file_decom, stringsAsFactors = FALSE)
   names(file_decom) <- c("year", "month", "basis_name")
   file_decom$basis_name <- stringr::str_replace(string = file_decom$basis_name, pattern = ".csv", replacement = "")
+  file_decom$year <- as.integer(file_decom$year)
+  file_decom$month <- as.integer(file_decom$month)
 
   file_decom
 }
